@@ -251,16 +251,15 @@ func main() {
 			current = O
 
 			// Have the computer pick a play
-			// Pick the play with the highest chance of O winning
-			var highest float64
+			// Pick the play with the lowest chance of X winning
+			lowest := 1.0
 			var choice int
 
 			for i, chances := range endgame.choices {
 				total := chances.end.O + chances.end.X + chances.end.Tied
-				// Go for highest win
-				win := float64(chances.end.O) / float64(total)
-				if win > highest {
-					highest = win
+				loss := float64(chances.end.X) / float64(total)
+				if loss < lowest {
+					lowest = loss
 					choice = i
 				}
 
